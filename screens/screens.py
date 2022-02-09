@@ -1,3 +1,4 @@
-#import all screens in this folder so there's no need to do that in main.py
-
+# In this file i import all the screen in this folder so that i wouldnt have to 
+# do that in the main.py file
 from screens.home import Home
+from screens.feed import Feed

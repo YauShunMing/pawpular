@@ -5,15 +5,16 @@ Builder.load_string(
 """
 #: import get_color_from_hex kivy.properties.get_color_from_hex
 <ProfileImg>:
-    size_hint:None, None
-    size: '50dp','50dp'
+    size_hint: None, None
+    size: '50dp', '50dp'
     radius: '25dp'
-    md_bg_color: [1,1,1,1]
+    md_bg_color: [1, 1, 1, 1]
     img: ''
     FitImage:
         source: root.img
         radius: root.radius
-        size: '45dp','45dp'
+        size: '45dp', '45dp'
+        size_hint: None, None
         center: root.center
     MDLabel: #Didnt use icon because it wasnt bold enough
         text: '+'
@@ -25,8 +26,8 @@ Builder.load_string(
         radius: '20dp'
         halign: 'center'
         bold: True
-
-""")
+"""
+)
 
 class ProfileImg(MDFloatLayout):
     pass

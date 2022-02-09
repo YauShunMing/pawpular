@@ -2,17 +2,15 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.lang.builder import Builder
 from kivy.properties import DictProperty
 
-
-
 Builder.load_string(
 """
 <VideoCard>:
-    md_bg_color: [0,0,0,1]
+    md_bg_color: [0, 0, 0, 1]
     size_hint_y: None
     video_state: 'stop'
     MDFloatLayout:
         Video:
-            source:root.data['source']
+            source: root.data['source']
             state: root.video_state
             pos_hint: {'center_x':.5, 'top':1}
         MDBoxLayout:
@@ -45,11 +43,12 @@ Builder.load_string(
                     height: self.texture_size[1]
                     font_size: '14sp'
                     size_hint_y: None
+                
         MDBoxLayout:
             orientation: 'vertical'
-            pos_hint: {'right':1,'y':0}
+            pos_hint: {'right':1, 'y':0}
             size_hint_x: None
-            width: root.width * 0.2
+            width: root.width * 0.2 #20% of screen width
             spacing: '20dp'
             padding: '5dp'
             ProfileImg:
@@ -67,10 +66,9 @@ Builder.load_string(
                 text: root.data['shares']
                 icon_size: '25sp'
             AlbumImg:
-                img:root.data['album_pic']
-
-""")
-
+                img: root.data['album_pic']
+"""
+)
 
 class VideoCard(MDBoxLayout):
     data = DictProperty(defaultvalue={
