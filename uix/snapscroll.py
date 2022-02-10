@@ -28,19 +28,24 @@ class SnapScroll(ScrollView):
         self._touch = None # cancel touch
         local_touch = self.to_local(*touch.pos)
 
-        if local_touch[1] > touch.ud['pos'][1]: # Comparing current touch pos with the one we saved.
+        if (local_touch[1] > touch.ud['pos'][1]) or (local_touch[0] < touch.ud['pos'][0]): # Comparing current touch pos with the one we saved.
                                                 # to know the direction the user is scrolling. 
             if touch.ud['index'] != 0: # If widget is not the first, scroll up
                 self.scroll_to(self.layout.children[touch.ud['index']-1], padding=0)
                 self.layout.children[touch.ud['index']-1].video_state = 'play' # play next video
                 self.layout.children[touch.ud['index']].video_state = 'pause' # pause current video
 
-        elif local_touch[1] < touch.ud['pos'][1]:
+                print('up....', local_touch[0],touch.ud['pos'][0])
+
+        elif (local_touch[1] < touch.ud['pos'][1]) or (local_touch[0] > touch.ud['pos'][0]):
             if touch.ud['index'] < len(self.layout.children)-1: # If widget is not the last, scroll down
                 self.scroll_to(self.layout.children[touch.ud['index']+1], padding=0)
 
                 self.layout.children[touch.ud['index']+1].video_state = 'play' # play prev video
                 self.layout.children[touch.ud['index']].video_state = 'pause' # pause current video
 
+                print('down...', local_touch[0],touch.ud['pos'][0])
+
+        
         touch.ud.pop('pos') # we are done with the pos we save so we clear it
         return True #...........

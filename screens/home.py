@@ -18,12 +18,8 @@ Builder.load_string(
         ScreenManager:
             id: screen_manager
             transition: FadeTransition()                      
-            Screen:
-                name: 'match'
-                MDLabel:
-                    text: 'match'
-                    halign: 'center'
-            Feed                  
+            Match
+            Feed                 
             Screen:
                 name: 'event'
                 MDLabel:
@@ -38,29 +34,7 @@ Builder.load_string(
             size_hint_y: None
             height: '50dp'
             NavBar:
-                screen_manager: screen_manager
-            
-    MDBoxLayout:
-        height: dp(20)
-        size_hint_y: None
-        pos_hint: {'top':.95, 'center_x':.5}
-        adaptive_width: True
-        spacing: '5dp'
-        MDTextButton:
-            text: 'Following'
-            font_size: '16sp'
-            theme_text_color: 'Custom'
-            text_color: [1, 1, 1, .5]
-        MDSeparator:
-            orientation: 'vertical'
-            width: '2dp'
-            md_bg_color: [1, 1, 1, .5]
-        MDTextButton:
-            text: 'Following'
-            font_size: '16sp'
-            theme_text_color: 'Custom'
-            text_color: [1, 1, 1, 1]
-            bold: True
+                screen_manager: screen_manager        
 """
 )
 

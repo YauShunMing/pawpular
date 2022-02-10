@@ -2,3 +2,4 @@
 # do that in the main.py file
 from screens.home import Home
 from screens.feed import Feed
+from screens.match import Match

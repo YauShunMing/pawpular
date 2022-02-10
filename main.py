@@ -17,7 +17,7 @@ class WindowManager(ScreenManager):
 
 Window.size = (310, 600)
 
-class TikTok(MDApp):
+class Pawpular(MDApp):
     def build(self):
         self.wm = WindowManager(transition=FadeTransition()) #Transition between screens
         self.theme_cls.theme_style= 'Dark'
@@ -38,4 +38,4 @@ class TikTok(MDApp):
         return self.wm
 
 if __name__ == '__main__':
-    TikTok().run()
+    Pawpular().run()

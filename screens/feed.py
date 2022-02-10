@@ -15,7 +15,7 @@ Builder.load_string(
     MDBoxLayout:    
         md_bg_color: [0, 0, 0, 1]
         size_hint_y: None
-        height: root.height - dp(50)
+        height: root.height
         SnapScroll:
             layout: layout
             MDBoxLayout:
