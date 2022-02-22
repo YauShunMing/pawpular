@@ -1,8 +1,9 @@
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivy.lang.builder import Builder
-from kivy.properties import DictProperty
+from kivy.properties import DictProperty,StringProperty
 from uix.snapscroll import SnapScroll
+
 
 Builder.load_string(
 """
@@ -11,13 +12,14 @@ Builder.load_string(
     size_hint_y: None
     size_hint_x: None
     Image:
-        source: 'assets/img/dog_1.jpg'
+        source: root.source
         pos_hint: {'center_x':.5, 'top':1}
 """
 )
 
 class MatchCard(MDBoxLayout):
-    pass
+    source = StringProperty(None)
+    
 
 
 # MDProgressBar:

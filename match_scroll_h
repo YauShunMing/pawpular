@@ -1,0 +1,31 @@
+Builder.load_string(
+"""
+<Match>:
+    layout: layout
+    name:'match'
+    MDBoxLayout:    
+        md_bg_color: [0, 1, 1, 1]
+        size_hint_y: None
+        height: root.height
+        width:root.width
+        SnapScroll:
+            layout: layout
+            MDBoxLayout:                
+                id: layout
+                orientation: 'horizontal'
+                adaptive_width: True
+                MatchCard:
+                    width: root.width
+                    height:root.height
+                MatchCard:
+                    width: root.width                    
+                    height:root.height
+    MDBoxLayout:        
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 0.01*root.width
+        pos_hint:{'bottom':0}
+        MDProgressBar:
+            value:50
+"""
+)

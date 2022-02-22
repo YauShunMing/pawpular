@@ -15,12 +15,13 @@ class SnapScroll(ScrollView):
     layout = ObjectProperty() # The adaptive layout inside the scrollview; where widgets are added to
 
     def on_scroll_start(self, touch, check_children=True):
-        touch.ud['pos'] = self.to_local(*touch.pos) # saving the touch pos clicked by the user.
+        touch.ud['out_pos'] = self.to_local(*touch.pos) # saving the touch pos clicked by the user.
         for widget in self.layout.children: # Looping through all widget to get the clicked widget
             if widget != self:
-                if widget.collide_point(*touch.ud['pos']):
-                    touch.ud['widget'] = widget # saving the widget that recieved the touch
-                    touch.ud['index'] = self.layout.children.index(widget) # and its index
+                if widget.collide_point(*touch.ud['out_pos']):
+                    touch.ud['out_widget'] = widget # saving the widget that recieved the touch
+                    touch.ud['out_index'] = self.layout.children.index(widget) # and its index
+                    #print(touch.ud, self.layout.children)
 
         return super().on_scroll_start(touch, check_children=check_children) # Make sure you return this
 
@@ -28,24 +29,29 @@ class SnapScroll(ScrollView):
         self._touch = None # cancel touch
         local_touch = self.to_local(*touch.pos)
 
-        if (local_touch[1] > touch.ud['pos'][1]) or (local_touch[0] < touch.ud['pos'][0]): # Comparing current touch pos with the one we saved.
-                                                # to know the direction the user is scrolling. 
-            if touch.ud['index'] != 0: # If widget is not the first, scroll up
-                self.scroll_to(self.layout.children[touch.ud['index']-1], padding=0)
-                self.layout.children[touch.ud['index']-1].video_state = 'play' # play next video
-                self.layout.children[touch.ud['index']].video_state = 'pause' # pause current video
+        #print('out touch ud', touch.ud['out_pos'])
+        #print('out local_touch', local_touch)        
 
-                print('up....', local_touch[0],touch.ud['pos'][0])
+        if abs(local_touch[0] - touch.ud['out_pos'][0]) < 50:
 
-        elif (local_touch[1] < touch.ud['pos'][1]) or (local_touch[0] > touch.ud['pos'][0]):
-            if touch.ud['index'] < len(self.layout.children)-1: # If widget is not the last, scroll down
-                self.scroll_to(self.layout.children[touch.ud['index']+1], padding=0)
+            if local_touch[1] > touch.ud['out_pos'][1]: # Comparing current touch pos with the one we saved.
+                                                    # to know the direction the user is scrolling. 
+                if touch.ud['out_index'] != 0: # If widget is not the first, scroll up
+                    self.scroll_to(self.layout.children[touch.ud['out_index']-1], padding=0)
+                    self.layout.children[touch.ud['out_index']-1].video_state = 'play' # play next video
+                    self.layout.children[touch.ud['out_index']].video_state = 'pause' # pause current video
 
-                self.layout.children[touch.ud['index']+1].video_state = 'play' # play prev video
-                self.layout.children[touch.ud['index']].video_state = 'pause' # pause current video
+                    #print('up....', local_touch[0],touch.ud['out_pos'][0])
 
-                print('down...', local_touch[0],touch.ud['pos'][0])
+            elif local_touch[1] < touch.ud['out_pos'][1]:
+                if touch.ud['out_index'] < len(self.layout.children)-1: # If widget is not the last, scroll down
+                    self.scroll_to(self.layout.children[touch.ud['out_index']+1], padding=0)
 
-        
-        touch.ud.pop('pos') # we are done with the pos we save so we clear it
+                    self.layout.children[touch.ud['out_index']+1].video_state = 'play' # play prev video
+                    self.layout.children[touch.ud['out_index']].video_state = 'pause' # pause current video
+
+                    #print('down...', local_touch[0],touch.ud['out_pos'][0])
+
+            
+        touch.ud.pop('out_pos') # we are done with the pos we save so we clear it
         return True #...........
