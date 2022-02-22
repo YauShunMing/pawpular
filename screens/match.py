@@ -10,12 +10,16 @@ from kivy.app import App
 
 Builder.load_string(
 """
+<MySwiper@MDSwiperItem>
+    FitImage:
+        source:'assets/img/dog_2.jpg'
+        radius: [20,]
+
 <Match>:
     #layout:layout
     in_layout:in_layout
     name:'match'
     MDBoxLayout:    
-        md_bg_color: [0, 1, 1, 1]
         size_hint_y: None
         height: root.height
         width:root.width
@@ -31,64 +35,16 @@ Builder.load_string(
                     size_hint_y: None
                     width:root.width
                     height:root.height                 
-                    SnapScrollH:
-                        in_layout:in_layout
-                        MDBoxLayout:                
-                            id:in_layout
-                            orientation: 'horizontal'
-                            adaptive_width: True
-                            MatchCard:
-                                width: root.width
-                                height:root.height
-                                source:'assets/img/dog_1.jpg'
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height 
-                MDBoxLayout:
-                    md_bg_color: [0,0,0,0]
-                    size_hint_y: None
-                    width:root.width
-                    height:root.height                 
-                    SnapScrollH:
-                        in_layout:in_layout
-                        MDBoxLayout:                
-                            id:in_layout
-                            orientation: 'horizontal'
-                            adaptive_width: True
-                            MatchCard:
-                                width: root.width
-                                height:root.height
-                                source:'assets/img/dog_2.jpg'
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height  
-                MDBoxLayout:
-                    md_bg_color: [0,0,0,0]
-                    size_hint_y: None
-                    width:root.width
-                    height:root.height                 
-                    SnapScrollH:
-                        in_layout:in_layout
-                        MDBoxLayout:                
-                            id:in_layout
-                            orientation: 'horizontal'
-                            adaptive_width: True
-                            MatchCard:
-                                width: root.width
-                                height:root.height
-                                source:'assets/img/dog_3.jpg'
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height
-                            MatchCard:
-                                width: root.width                    
-                                height:root.height                                                                               
+                    MDSwiper:
+                        items_spacing: '5dp'
+                        size_durration: 0.1
+                        size_hint_y: None
+                        height: root.height
+                        size_hint_x: None
+                        width: root.width
+                        MySwiper:
+                        MySwiper:
+                        MySwiper:
     MDBoxLayout:        
         orientation: 'horizontal'
         size_hint_y: None
