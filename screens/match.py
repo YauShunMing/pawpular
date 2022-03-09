@@ -10,48 +10,59 @@ from kivy.app import App
 
 Builder.load_string(
 """
-<MySwiper@MDSwiperItem>
-    FitImage:
-        source:'assets/img/dog_2.jpg'
-        radius: [20,]
-
 <Match>:
     #layout:layout
-    in_layout:in_layout
     name:'match'
-    MDBoxLayout:    
-        size_hint_y: None
-        height: root.height
-        width:root.width
-        SnapScroll:
-            layout:layout
-            in_layout:in_layout
-            MDBoxLayout:
-                id:layout
-                orientation:'vertical'
-                adaptive_height:True
+    MDFloatLayout:
+        md_bg_color:(0,0,1,0.2)
+        MDBoxLayout:    
+            size_hint_y: None
+            height: root.height
+            width:root.width
+            SnapScroll:
+                layout:layout
                 MDBoxLayout:
-                    md_bg_color: [0,0,0,0]
-                    size_hint_y: None
-                    width:root.width
-                    height:root.height                 
-                    MDSwiper:
-                        items_spacing: '5dp'
-                        size_durration: 0.1
+                    id:layout
+                    orientation:'vertical'
+                    adaptive_height:True
+                    MDBoxLayout:
+                        md_bg_color: [0,0,0,0]
                         size_hint_y: None
-                        height: root.height
-                        size_hint_x: None
-                        width: root.width
-                        MySwiper:
-                        MySwiper:
-                        MySwiper:
-    MDBoxLayout:        
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: 0.01*root.width
-        pos_hint:{'bottom':0}
-        MDProgressBar:
-            value:50
+                        width:root.width
+                        height:root.height                 
+                        MDSwiper:                        
+                            items_spacing: '5dp'
+                            size_durration: 0.1
+                            size_hint_y: None
+                            height: root.height
+                            size_hint_x: None
+                            width: root.width
+                            MySwiper:
+                                img: 'assets/img/dog_1.jpg'
+                            MySwiper:
+                                img: 'assets/img/dog_2.jpg'
+                            MySwiper:
+                                img: 'assets/img/dog_3.jpg'
+                    MDBoxLayout:
+                        md_bg_color: [0,0,0,0]
+                        size_hint_y: None
+                        width:root.width
+                        height:root.height                 
+                        MDSwiper:                        
+                            items_spacing: '5dp'
+                            size_durration: 0.1
+                            size_hint_y: None
+                            height: root.height
+                            size_hint_x: None
+                            width: root.width
+                            MySwiper:
+                                img: 'assets/img/image_1.jpg'
+                            MySwiper:
+                                img: 'assets/img/image_2.jpg'
+                            MySwiper:
+                                img: 'assets/img/image_3.jpg'                            
+        PawButton
+        InfoBox
 """
 )
 

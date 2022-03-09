@@ -1,52 +1,30 @@
-# scrollview vertical and horizontal
-# lcpallares
-import kivy
+from kivy.uix.label import Label
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.lang.builder import Builder
+from kivy.uix.behaviors import DragBehavior
+from kivy.lang import Builder
 
- 
- 
-Builder.load_string(
-"""
-<MainWid>:
-    BoxLayout:
-        ScrollView:
-            GridLayout:
-                id: container_y
-                size_hint_y: None
-                cols: 1
-                row_default_height: root.height*0.2
-                height: self.minimum_height
-    BoxLayout:
-        ScrollView:
-            GridLayout:
-                id: container_x
-                size_hint_x: None
-                rows: 1
-                col_default_width: root.width*0.2
-                width: self.minimum_width
-"""
-)
+# You could also put the following in your kv file...
+kv = '''
+<DragLabel>:
+    # Define the properties for the DragLabel
+    drag_rectangle: self.x, self.y, self.width, self.height
+    drag_timeout: 10000000
+    drag_distance: 0
+
+FloatLayout:
+    # Define the root widget
+    DragLabel:
+        size_hint: 0.25, 0.2
+        text: 'Drag me'
+'''
 
 
-class MainWid(BoxLayout):
-    def __init__(self):
-        super(MainWid, self).__init__()
-        for i in range(30):
-            self.ids.container_y.add_widget(Button(text=f"Botony: {i}"))
-        for i in range(30):
-            self.ids.container_x.add_widget(Button(text=f"Botonx: {i}"))
- 
- 
-class MainApp(App):
-    title = "Scroll view"
- 
+class DragLabel(DragBehavior, Label):
+    pass
+
+
+class TestApp(App):
     def build(self):
-        return MainWid()
- 
- 
-if __name__ == "__main__":
-    MainApp().run()
- 
+        return Builder.load_string(kv)
+
+TestApp().run()

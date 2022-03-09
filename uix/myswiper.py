@@ -9,16 +9,20 @@ from kivy.app import App
 from kivymd.uix.swiper import MDSwiperItem
 from kivy.properties import StringProperty
 
-# Builder.load_string(
-# """
-# <MySwiper@MDSwiperItem>
-#     FitImage:
-#         source: root.source
-#         radius: [20,]
-# """
-# )
+Builder.load_string(
+"""
+<MySwiper>:
+    img: ''
+    FitImage:
+        source:root.img
+        radius: [20,]
+"""
+)
 
-# class MySwiper(MDSwiperItem):
-#     source  = StringProperty(None)
+
+class MySwiper(MDSwiperItem):
+    #source  = StringProperty(None)
+    pass
+    
 
 
